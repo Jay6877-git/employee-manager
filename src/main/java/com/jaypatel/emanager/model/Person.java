@@ -32,6 +32,8 @@ public class Person {
     /** Primary contact number (format not enforced). */
     private String phoneNumber;
 
+    private Address address;
+
     /** No-args constructor for frameworks and serialization. */
     public Person() {
     }
@@ -45,12 +47,14 @@ public class Person {
      * @param birthDate   the person's birthdate string (e.g., {@code "2000-01-31"})
      * @param phoneNumber the person's phone number string
      */
-    public Person(String lastName, String firstName, char middleInit, String birthDate, String phoneNumber) {
+    public Person(String lastName, String firstName, char middleInit, String birthDate, String phoneNumber, Address address) {
         this.lastName = (lastName == null || lastName.isBlank()) ? null : lastName.trim();
         this.firstName = (firstName == null || firstName.isBlank()) ? null : firstName.trim();
         this.middleInit = middleInit;
         this.birthDate = (birthDate == null || birthDate.isBlank()) ? null : birthDate.trim();
         this.phoneNumber = (phoneNumber == null || phoneNumber.isBlank()) ? null : phoneNumber.trim();
+
+        this.address = address;
     }
 
     /**
@@ -99,6 +103,15 @@ public class Person {
     }
 
     /**
+     * Sets the Address.
+     *
+     * @param address to set address
+     */
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    /**
      * Returns the last name (surname).
      *
      * @return the last name
@@ -126,9 +139,9 @@ public class Person {
     }
 
     /**
-     * Returns the birth date string.
+     * Returns the birthdate string.
      *
-     * @return the birth date, as provided (no parsing/validation)
+     * @return the birthdate, as provided (no parsing/validation)
      */
     public String getBirthDate() {
         return birthDate;
@@ -141,6 +154,14 @@ public class Person {
      */
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    /**
+     * Returns the address
+     * @return the address class
+     */
+    public Address getAddress() {
+        return address;
     }
 
     /**
