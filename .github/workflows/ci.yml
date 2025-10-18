@@ -2,7 +2,7 @@ name: ci
 
 on:
   pull_request:
-    branches: [ main ]   
+    branches: [ main ]
   push:
     branches:
       - 'feature/**'
@@ -41,4 +41,7 @@ jobs:
             target/*.jar
             target/surefire-reports/**
             target/failsafe-reports/**
+            target/checkstyle-result.xml
+            target/spotbugsXml.xml
+            target/site/jacoco/**
           retention-days: 7
