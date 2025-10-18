@@ -3,10 +3,10 @@ name: release
 on:
   push:
     tags:
-      - 'v*'   # e.g., v0.1.0
+      - 'v*'   # e.g., v0.1.2
 
 permissions:
-  contents: write   # needed to create a GitHub Release
+  contents: write
 
 jobs:
   release:
@@ -34,18 +34,18 @@ jobs:
 
       - name: Build shaded JAR + Javadoc
         run: |
-          mvn -B -P release -DskipTests=false package
-          mvn -B javadoc:javadoc
+          # Build executable fat JAR (using your release profile) and generate Javadoc + javadoc.jar
+          mvn -B -P release -DskipTests=false package javadoc:javadoc javadoc:jar
 
       - name: Compute checksums
         run: |
           cd target
           for f in *.jar; do sha256sum "$f" > "$f.sha256"; done
 
-      - name: Zip Javadoc
+      - name: Zip Javadoc (if present)
+        if: ${{ hashFiles('target/site/apidocs/**/*') != '' }}
         run: |
-          cd target/site
-          zip -r apidocs.zip apidocs
+          (cd target/site && zip -r apidocs.zip apidocs)
 
       - name: Generate simple release notes
         run: |
@@ -65,12 +65,18 @@ jobs:
             target/*.jar.sha256
             target/site/apidocs.zip
 
+      # ---- GitHub Pages publish (safe even if no docs) ----
       - name: Stage Javadoc for Pages
         run: |
           rm -rf gh-pages
-          mkdir -p gh-pages/docs/${{ steps.vars.outputs.version }} gh-pages/latest
-          cp -r target/site/apidocs/* gh-pages/docs/${{ steps.vars.outputs.version }}/
-          cp -r target/site/apidocs/* gh-pages/latest/
+          mkdir -p gh-pages
+          if [ -d target/site/apidocs ]; then
+            mkdir -p gh-pages/docs/${{ steps.vars.outputs.version }} gh-pages/latest
+            cp -r target/site/apidocs/* gh-pages/docs/${{ steps.vars.outputs.version }}/
+            cp -r target/site/apidocs/* gh-pages/latest/
+          else
+            echo "<!doctype html><h1>No Javadoc for v${{ steps.vars.outputs.version }}</h1>" > gh-pages/index.html
+          fi
 
       - name: Publish to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
