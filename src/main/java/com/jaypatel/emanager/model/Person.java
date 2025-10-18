@@ -109,13 +109,7 @@ public class Person {
      * @param address to set address
      */
     public void setAddress(Address address) {
-
-        if (address != null) {
-            this.address.setCity(address.getCity());
-            this.address.setProvince(address.getProvince());
-            this.address.setPostalCode(address.getPostalCode());
-            this.address.setStreet(address.getStreet());
-        } else this.address = null;
+        this.address = copy(address);
     }
 
     /**
@@ -168,7 +162,7 @@ public class Person {
      * @return the address class
      */
     public Address getAddress() {
-        return address;
+        return copy(this.address); // defensive copy
     }
 
     /**
@@ -219,5 +213,15 @@ public class Person {
             if (middleInit != '\0') sb.append(' ').append(middleInit);
         }
         return sb.toString();
+    }
+
+    private static Address copy(Address src) {
+        if (src == null) return null;
+        Address dst = new Address();                 // uses your null-safe setters
+        dst.setStreet(src.getStreet());
+        dst.setCity(src.getCity());
+        dst.setProvince(src.getProvince());
+        dst.setPostalCode(src.getPostalCode());
+        return dst;
     }
 }
