@@ -64,3 +64,17 @@ jobs:
             target/*.jar
             target/*.jar.sha256
             target/site/apidocs.zip
+
+      - name: Stage Javadoc for Pages
+        run: |
+          rm -rf gh-pages
+          mkdir -p gh-pages/docs/${{ steps.vars.outputs.version }} gh-pages/latest
+          cp -r target/site/apidocs/* gh-pages/docs/${{ steps.vars.outputs.version }}/
+          cp -r target/site/apidocs/* gh-pages/latest/
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: gh-pages
+          commit_message: "docs: publish Javadoc for v${{ steps.vars.outputs.version }}"
