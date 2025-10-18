@@ -46,6 +46,7 @@ public class Person {
      * @param middleInit  the person's middle initial; use {@code '\0'} if none/unknown
      * @param birthDate   the person's birthdate string (e.g., {@code "2000-01-31"})
      * @param phoneNumber the person's phone number string
+     * @param address     the person's address
      */
     public Person(String lastName, String firstName, char middleInit, String birthDate, String phoneNumber, Address address) {
         this.lastName = (lastName == null || lastName.isBlank()) ? null : lastName.trim();
@@ -54,7 +55,7 @@ public class Person {
         this.birthDate = (birthDate == null || birthDate.isBlank()) ? null : birthDate.trim();
         this.phoneNumber = (phoneNumber == null || phoneNumber.isBlank()) ? null : phoneNumber.trim();
 
-        this.address = address;
+        setAddress(address);
     }
 
     /**
@@ -108,7 +109,13 @@ public class Person {
      * @param address to set address
      */
     public void setAddress(Address address) {
-        this.address = address;
+
+        if (address != null) {
+            this.address.setCity(address.getCity());
+            this.address.setProvince(address.getProvince());
+            this.address.setPostalCode(address.getPostalCode());
+            this.address.setStreet(address.getStreet());
+        } else this.address = null;
     }
 
     /**
