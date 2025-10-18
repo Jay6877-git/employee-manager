@@ -1,0 +1,18 @@
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule: { interval: "weekly" }
+    labels: ["deps", "ci"]
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule: { interval: "weekly" }
+    labels: ["deps", "java"]
+    open-pull-requests-limit: 5
+    # Optional: group minor/patch bumps to reduce PR noise
+    groups:
+      minor-and-patch:
+        patterns: ["*"]
+        update-types: ["minor", "patch"]

@@ -1,0 +1,8 @@
+# Default owner: you
+*                 @Jay6877-git
+
+# CI & docs
+.github/**        @Jay6877-git
+
+# Java source
+src/**            @Jay6877-git
