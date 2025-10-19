@@ -1,4 +1,7 @@
 package com.jaypatel.emanager.model;
+
+import java.math.BigDecimal;
+
 /**
  * Base abstract type for all employees in the system.
  * <p>
@@ -102,5 +105,5 @@ public abstract class Employee extends Person{
      *
      * @return the earnings amount
      */
-    public abstract double getEarnings();
+    public abstract BigDecimal getEarnings();
 }
