@@ -96,7 +96,7 @@
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.9.7.0</version>
+                <version>4.9.8.1</version>
                 <configuration>
                     <effort>Max</effort>
                     <threshold>Low</threshold>
@@ -147,7 +147,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.2.5</version>
+                <version>3.5.4</version>
                 <configuration>
                     <useModulePath>false</useModulePath>
                 </configuration>
