@@ -2,7 +2,6 @@ package com.jaypatel.emanager.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.Objects;
 
 /**
  * An {@code Employee} paid a fixed annual salary.
@@ -72,7 +71,6 @@ public class SalaryEmployee extends Employee{
 
     /** Ensures non-null, clamps negative to 0, and sets scale=2 with HALF_UP. */
     private static BigDecimal normalize(BigDecimal value) {
-        Objects.requireNonNull(value, "annualSalary");
-        return value.max(BigDecimal.ZERO).setScale(2, RoundingMode.HALF_UP);
+        return value == null ? BigDecimal.ZERO.setScale(2,RoundingMode.HALF_UP) : value.max(BigDecimal.ZERO).setScale(2, RoundingMode.HALF_UP);
     }
 }
