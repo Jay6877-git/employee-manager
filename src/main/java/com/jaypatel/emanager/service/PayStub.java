@@ -67,7 +67,7 @@ public class PayStub {
         return employee;
     }
 
-    /** @return the gross earnings for this pay period (may be unscaled) */
+    /** @return the gross earnings for this pay period */
     public BigDecimal getGross() {
         return gross;
     }
