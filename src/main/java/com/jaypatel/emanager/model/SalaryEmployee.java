@@ -71,6 +71,6 @@ public class SalaryEmployee extends Employee{
 
     /** Ensures non-null, clamps negative to 0, and sets scale=2 with HALF_UP. */
     private static BigDecimal normalize(BigDecimal value) {
-        return value == null ? BigDecimal.ZERO : value.max(BigDecimal.ZERO).setScale(2, RoundingMode.HALF_UP);
+        return value == null ? BigDecimal.ZERO.setScale(2,RoundingMode.HALF_UP) : value.max(BigDecimal.ZERO).setScale(2, RoundingMode.HALF_UP);
     }
 }

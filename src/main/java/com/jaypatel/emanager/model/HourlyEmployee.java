@@ -87,6 +87,6 @@ public class HourlyEmployee extends Employee{
 
     /** Ensures non-null, clamps negative to 0. */
     private static BigDecimal validatedNonNegative(BigDecimal value) {
-        return value == null ? BigDecimal.ZERO : value.max(BigDecimal.ZERO);
+        return value == null ? BigDecimal.ZERO.setScale(2,RoundingMode.HALF_UP) : value.max(BigDecimal.ZERO).setScale(2,RoundingMode.HALF_UP);
     }
 }
