@@ -21,8 +21,8 @@ public class FixedPercentDeduction implements Deduction{
      * @throws IllegalArgumentException if {@code name} is null or blank
      */
     public FixedPercentDeduction(String name, BigDecimal percent) {
-        if (name == null || name.isBlank()) throw new IllegalArgumentException("name");
-        this.name = name;
+        if (name == null || name.isBlank()) this.name = "---";
+        else this.name = name;
         this.percent = (percent == null) ? BigDecimal.ZERO : percent.max(BigDecimal.ZERO);
     }
 

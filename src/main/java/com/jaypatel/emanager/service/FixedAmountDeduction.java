@@ -27,8 +27,8 @@ public class FixedAmountDeduction implements Deduction{
      * @throws IllegalArgumentException if {@code name} is null or blank
      */
     public FixedAmountDeduction(String name, BigDecimal amountMonthly) {
-        if (name == null || name.isBlank()) throw new IllegalArgumentException("name");
-        this.name = name;
+        if (name == null || name.isBlank()) this.name = "---";
+        else this.name = name;
         this.amountMonthly = (amountMonthly == null) ? BigDecimal.ZERO : amountMonthly.max(BigDecimal.ZERO).setScale(2, RoundingMode.HALF_UP);
     }
 
