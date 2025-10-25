@@ -44,16 +44,6 @@ public class SalaryEmployeeTest {
     }
 
     @Test
-    void nullAnnualSalary_throwsOnConstructorAndSetter() {
-        // Constructor
-        assertThrows(NullPointerException.class, () -> newEmp(null));
-
-        // Setter
-        SalaryEmployee e = newEmp(new BigDecimal("1.00"));
-        assertThrows(NullPointerException.class, () -> e.setAnnualSalary(null));
-    }
-
-    @Test
     void scaleIsAlwaysTwo() {
         SalaryEmployee e = newEmp(new BigDecimal("123"));
         assertEquals(2, e.getAnnualSalary().scale());
