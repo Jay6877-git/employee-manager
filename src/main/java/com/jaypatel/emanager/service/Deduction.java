@@ -10,5 +10,5 @@ import java.math.BigDecimal;
 public interface Deduction {
     String name();
 
-    BigDecimal amountFor(Employee employee, BigDecimal monthlyGross);
+    BigDecimal amountFor(Employee employee);
 }
