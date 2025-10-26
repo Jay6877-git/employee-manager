@@ -73,4 +73,12 @@ public class SalaryEmployee extends Employee{
     private static BigDecimal normalize(BigDecimal value) {
         return value == null ? BigDecimal.ZERO.setScale(2,RoundingMode.HALF_UP) : value.max(BigDecimal.ZERO).setScale(2, RoundingMode.HALF_UP);
     }
+
+    /**
+     * To provide defensive copy
+     * @return defensive Copy of Employee
+     */
+    public Employee copy(){
+        return new SalaryEmployee(this.getLastName(), this.getFirstName(), this.getMiddleInit(), this.getBirthDate(), this.getPhoneNumber(), this.getAddress(), this.getEmployeeId(), this.getJobTitle(), this.annualSalary);
+    }
 }

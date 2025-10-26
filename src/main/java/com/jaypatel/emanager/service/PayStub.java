@@ -7,6 +7,7 @@ import java.math.RoundingMode;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Immutable view of a single pay stub for an employee.
@@ -33,9 +34,9 @@ public class PayStub {
      *                   The map is defensively copied and wrapped unmodifiable.
      */
     public PayStub(Employee employee, Map<String, BigDecimal> deductions) {
-        this.employee = employee;
+        this.employee = employee.copy();
         // If earnings is null, treat as 0.00 to avoid NPEs.
-        this.gross = (employee != null && employee.getEarnings() != null)
+        this.gross = employee.getEarnings() != null
                 ? employee.getEarnings()
                 : BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
 
@@ -64,7 +65,7 @@ public class PayStub {
 
     /** @return the employee this pay stub belongs to */
     public Employee getEmployee() {
-        return employee;
+        return employee.copy();
     }
 
     /** @return the gross earnings for this pay period */

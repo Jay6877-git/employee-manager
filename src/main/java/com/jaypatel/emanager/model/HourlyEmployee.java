@@ -42,6 +42,7 @@ public class HourlyEmployee extends Employee{
         this.hourlyRate = validatedNonNegative(hourlyRate);
     }
 
+
     /** @return hours this month (scale 2, never negative). */
     public BigDecimal getMonthlyHours() {
         return monthlyHours;
@@ -88,5 +89,13 @@ public class HourlyEmployee extends Employee{
     /** Ensures non-null, clamps negative to 0. */
     private static BigDecimal validatedNonNegative(BigDecimal value) {
         return value == null ? BigDecimal.ZERO.setScale(2,RoundingMode.HALF_UP) : value.max(BigDecimal.ZERO).setScale(2,RoundingMode.HALF_UP);
+    }
+
+    /**
+     * To provide defensive copy
+     * @return defensive Copy of Employee
+     */
+    public Employee copy(){
+        return new HourlyEmployee(this.getLastName(), this.getFirstName(), this.getMiddleInit(), this.getBirthDate(), this.getPhoneNumber(), this.getAddress(), this.getEmployeeId(), this.getJobTitle(), this.monthlyHours, this.hourlyRate);
     }
 }

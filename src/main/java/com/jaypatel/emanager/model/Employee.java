@@ -106,4 +106,6 @@ public abstract class Employee extends Person{
      * @return the earnings amount
      */
     public abstract BigDecimal getEarnings();
+
+    public abstract Employee copy();
 }
